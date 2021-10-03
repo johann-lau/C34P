@@ -8,10 +8,10 @@ const Render = Matter.Render
 var engine, world, isMobile;
 var finalWidth, finalHeight;
 var dropper;
+
+var squares = [], circles = [], grounds = [];
 var ground1, ground2, ground3, ground4;
-
-var squares = [], circles = [];
-
+var my_color = "#FF0000";
 var i
 
 function preload() {
@@ -41,7 +41,6 @@ function setup() {
   dropper.addImage("dropper", dropper_img)
   dropper.scale = 0.25
 
-  fill(255,0,0)
   rectMode(CENTER)
   ellipseMode(RADIUS)
 }
@@ -54,18 +53,22 @@ function draw() {
   checkEdges()
   drawSprites()
 
-  // rect(ground1.body.position.x,ground1.body.position.y,finalWidth, 3)
-  // rect(ground2.body.position.x,ground2.body.position.y,3, finalHeight)
-  // rect(ground3.body.position.x,ground3.body.position.y,3, finalHeight)
-
   for (i=0; i<squares.length; i++) {
-    current = squares[i]
+    current = squares[i][0]
+    fill(squares[i][1])
     rect(current.position.x, current.position.y, 64, 64)
   }
 
   for (i=0; i<circles.length; i++) {
-    current = circles[i]
+    current = circles[i][0]
+    fill(circles[i][1])
     ellipse(current.position.x, current.position.y, 32)
+  }
+
+  for (i=0; i<grounds.length; i++) {
+    current = grounds[i][0]
+    fill(grounds[i][1])
+    rect(current.position.x, current.position.y, grounds[i][2], grounds[i][3])
   }
 }
 
@@ -94,6 +97,22 @@ function checkKeys() {
   if (keyDown("L")) {
     dropper.x += 16
   }
+
+  if (keyWentDown("T")) {
+    dropper.y -= 64
+  }
+
+  if (keyWentDown("F")) {
+    dropper.x -= 64
+  }
+
+  if (keyWentDown("G")) {
+    dropper.y += 64
+  }
+
+  if (keyWentDown("H")) {
+    dropper.x += 64
+  }
   
   if (keyWentDown("1")) {
     new Square(dropper.x, dropper.y+64)
@@ -101,6 +120,10 @@ function checkKeys() {
 
   if (keyWentDown("2")) {
     new Circle(dropper.x, dropper.y+64)
+  }
+
+  if (keyWentDown("o")) {
+    new StaticRect(dropper.x, (dropper.y+finalHeight+32)/2, 3, finalHeight-dropper.y)
   }
 
   if (keyDown("shift") && keyDown("esc")) {
@@ -113,6 +136,34 @@ function checkKeys() {
       World.remove(world, circles[i])
     }
     circles = []
+  }
+
+  if (keyDown("Z")) {
+    my_color = "#FF0000"
+  }
+
+  if (keyDown("X")) {
+    my_color = "#FFFF00"
+  }
+
+  if (keyDown("C")) {
+    my_color = "#00FF00"
+  }
+
+  if (keyDown("V")) {
+    my_color = "#00FFFF"
+  }
+
+  if (keyDown("B")) {
+    my_color = "#0000FF"
+  }
+
+  if (keyDown("N")) {
+    my_color = "#FF00FF"
+  }
+
+  if (keyDown("M")) {
+    my_color = "#FFFFFF"
   }
 }
 
