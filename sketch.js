@@ -73,6 +73,34 @@ function draw() {
 }
 
 function checkKeys() {
+  if (keyWentDown("Z")) {
+    my_color = "#FF0000"
+  }
+
+  if (keyWentDown("X")) {
+    my_color = "#FFFF00"
+  }
+
+  if (keyWentDown("C")) {
+    my_color = "#00FF00"
+  }
+
+  if (keyWentDown("V")) {
+    my_color = "#00FFFF"
+  }
+
+  if (keyWentDown("B")) {
+    my_color = "#0000FF"
+  }
+
+  if (keyWentDown("N")) {
+    my_color = "#FF00FF"
+  }
+
+  if (keyWentDown("M")) {
+    my_color = "#FFFFFF"
+  }
+
   if (keyDown("W") || keyDown(38)) {
     dropper.y -= 8
   }
@@ -126,44 +154,83 @@ function checkKeys() {
     new StaticRect(dropper.x, (dropper.y+finalHeight+32)/2, 3, finalHeight-dropper.y)
   }
 
-  if (keyDown("shift") && keyDown("esc")) {
-    for (i=0; i<squares.length; i++) {
-      World.remove(world, squares[i])
+  if (keyDown("shift")) {
+    if (keyWentDown("esc")) {
+      for (i=0; i<squares.length; i++) {
+        World.remove(world, squares[i])
+      }
+      squares = []
+      for (i=0; i<circles.length; i++) {
+        World.remove(world, circles[i])
+      }
+      circles = []
     }
-    squares = []
 
-    for (i=0; i<circles.length; i++) {
-      World.remove(world, circles[i])
+    if (keyWentDown("Z")) {
+      my_color = "#FF8080"
     }
-    circles = []
+
+    if (keyWentDown("X")) {
+      my_color = "#FFFF80"
+    }
+
+    if (keyWentDown("C")) {
+      my_color = "#80FF80"
+    }
+
+    if (keyWentDown("V")) {
+      my_color = "#80FFFF"
+    }
+
+    if (keyWentDown("B")) {
+      my_color = "#8080FF"
+    }
+
+    if (keyWentDown("N")) {
+      my_color = "#FF80FF"
+    }
+
+    if (keyWentDown("M")) {
+      my_color = "#FFFFFF"
+    }
+
+    if (keyDown("1")) {
+    new Square(dropper.x, dropper.y+64)
   }
 
-  if (keyDown("Z")) {
-    my_color = "#FF0000"
+  if (keyDown("2")) {
+    new Circle(dropper.x, dropper.y+64)
+  }
   }
 
-  if (keyDown("X")) {
-    my_color = "#FFFF00"
-  }
+  if (keyDown("alt")) {
+    if (keyWentDown("Z")) {
+      my_color = "#A00000"
+    }
 
-  if (keyDown("C")) {
-    my_color = "#00FF00"
-  }
+    if (keyWentDown("X")) {
+      my_color = "#A0A000"
+    }
 
-  if (keyDown("V")) {
-    my_color = "#00FFFF"
-  }
+    if (keyWentDown("C")) {
+      my_color = "#00A000"
+    }
 
-  if (keyDown("B")) {
-    my_color = "#0000FF"
-  }
+    if (keyWentDown("V")) {
+      my_color = "#00A0A0"
+    }
 
-  if (keyDown("N")) {
-    my_color = "#FF00FF"
-  }
+    if (keyWentDown("B")) {
+      my_color = "#0000A0"
+    }
 
-  if (keyDown("M")) {
-    my_color = "#FFFFFF"
+    if (keyWentDown("N")) {
+      my_color = "#A000A0"
+    }
+
+    if (keyWentDown("M")) {
+      my_color = "#A0A0A0"
+    }
   }
 }
 
